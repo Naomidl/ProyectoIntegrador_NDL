@@ -1,6 +1,5 @@
 package Ada_School.Proyecto_Integrador.config;
 
-import Ada_School.Proyecto_Integrador.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

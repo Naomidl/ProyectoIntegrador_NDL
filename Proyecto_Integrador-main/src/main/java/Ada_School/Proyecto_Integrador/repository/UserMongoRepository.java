@@ -1,14 +1,17 @@
 package Ada_School.Proyecto_Integrador.repository;
 
-import Ada_School.Proyecto_Integrador.entity.UserEntity;
+
+
+import Ada_School.Proyecto_Integrador.entity.UserMongoEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends MongoRepository<UserEntity, String> {
+public interface UserMongoRepository extends MongoRepository<UserMongoEntity, String> {
 
-    Optional<UserEntity> findByEmail(String email);
+    Optional<UserMongoEntity> findByEmail(String email);
+
 
 }

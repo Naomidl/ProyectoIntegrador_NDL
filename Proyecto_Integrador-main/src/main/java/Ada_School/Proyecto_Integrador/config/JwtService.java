@@ -40,21 +40,38 @@ public class JwtService {
     }
 
     public String getUsernameFromToken(String token){
-        return getClaim(token, Claims::getSubject);
+
+        try {
+            return getClaim(token, Claims::getSubject);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails){
-        final String username = getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-    }
+    public boolean isTokenValid(String token, UserDetails userDetails) {
 
-    private Claims getAllClaims(String token){
-        return Jwts
-                .parserBuilder()
-                .setSigningKey(getKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        try {
+            final String username = getUsernameFromToken(token);
+            return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+    public Claims getAllClaims(String token) {
+        try {
+            return Jwts
+                    .parserBuilder()
+                    .setSigningKey(getKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (Exception e) {
+            return null;
+        }
+
+
+
     }
 
     public <T> T getClaim(String token, Function<Claims, T> claimsResolver){
